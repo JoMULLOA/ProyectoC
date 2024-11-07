@@ -1,7 +1,7 @@
 import cv2
 import os
 
-dataPath = r'C:\Users\manri\OneDrive\Escritorio\PCim'  # Cambia a la ruta donde almacenarás las imágenes
+dataPath = r'C:\Users\manri\OneDrive\Escritorio\PCim'
 
 # Preguntar cuántas personas se desean ingresar
 num_personas = int(input("¿Cuántas personas deseas ingresar para el entrenamiento? "))
