@@ -19,6 +19,7 @@ while True:
     ret, frame = cap.read()
     if not ret:
         break
+    frame = cv2.flip(frame, 1)
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     faces = faceClassif.detectMultiScale(gray, 1.3, 5)
     
@@ -31,7 +32,7 @@ while True:
         print(f"Etiqueta: {label}, Confianza: {confidence}")
         
         # Mostrar el nombre de la persona reconocida
-        if confidence > 50:
+        if confidence < 60:
             cv2.putText(frame, f'{peopleList[label]}', (x, y - 25), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
         else:
             cv2.putText(frame, 'Desconocido', (x, y - 25), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)

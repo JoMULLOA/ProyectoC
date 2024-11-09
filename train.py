@@ -21,15 +21,18 @@ for nameDir in peopleList:
         if image is None:
             print(f"Error al cargar la imagen: {imagePath}")
             continue
-        labels.append(label)
+        
+        # Preprocesamiento de la imagen
+        image = cv2.equalizeHist(image)  # Normalización del histograma
         facesData.append(image)
+        labels.append(label)
     label += 1
 
 if len(facesData) == 0:
     print("No se encontraron datos de entrenamiento.")
 else:
     # Entrenando el reconocedor de rostros
-    face_recognizer = cv2.face.LBPHFaceRecognizer_create()
+    face_recognizer = cv2.face.LBPHFaceRecognizer_create(radius=1, neighbors=8, grid_x=8, grid_y=8)
     print("Entrenando...")
     face_recognizer.train(facesData, np.array(labels))
     # Almacenando el modelo
